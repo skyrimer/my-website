@@ -1,0 +1,605 @@
+// Colors
+$nav-bg: hsl(206, 72%, 11%);
+$text-color: hsl(34, 64%, 98%);
+$secondary-color: hsl(185, 100%, 50%);
+$highlight-color: hsl(347, 97%, 69%);
+$body-background: linear-gradient(
+  to right,
+  hsl(226, 65%, 9%),
+  hsl(244, 65%, 9%)
+);
+
+// Animation speed
+$speed: 0.3s;
+$hover-transition: $speed ease-in-out;
+
+// Menu
+$desktop-menu-width: 15rem;
+$mobile-menu-height: 12vh;
+
+// Breakpoints
+$breakpoint-column: 48rem;
+$breakpoint-desktop: 68rem;
+$breakpoint-contain: 100rem;
+
+// scrolldown
+$scroll-color: $secondary-color;
+$scroll-height: 3.125rem;
+$scroll-width: $scroll-height * 0.6;
+$scroll-speed: 2s;
+
+// Templates
+
+%sectionsHight {
+  $height: 100vh - $mobile-menu-height;
+  min-height: $height;
+  @media screen and (min-width: $breakpoint-desktop) {
+    $height: 100vh;
+    height: $height;
+  }
+}
+
+%flex-align {
+  display: flex;
+  align-items: center;
+}
+
+%underline-animation {
+  color: $secondary-color;
+  background-image: linear-gradient(to right, currentColor, currentColor);
+  background-size: 0 3px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: all $hover-transition;
+  &:hover {
+    color: $highlight-color;
+    background-size: 100% 3px;
+  }
+}
+// General
+:root {
+  font-family: "Noto Sans", sans-serif;
+}
+body {
+  @extend %flex-align;
+  flex-direction: column;
+  background: $body-background;
+  color: $text-color;
+}
+
+h1 {
+  font-size: Min(3rem, 10vw);
+  margin: 1.5em 0 1em;
+  @media screen and (min-width: $breakpoint-column) {
+    font-size: Max(3rem, 4vw);
+    margin: 0.7em 0 2em;
+  }
+}
+
+p,
+li {
+  font-size: Max(1.2rem, 1vw);
+}
+p {
+  line-height: 2;
+  margin: 0 0 1.5em;
+}
+
+.courgette,
+h1 {
+  font-family: "Courgette", cursive;
+}
+
+.icon {
+  $size: Min(2.5rem, 9vw);
+  width: $size;
+  height: $size;
+  transition: all $hover-transition;
+  path {
+    fill: $text-color;
+    transition: all $hover-transition;
+  }
+}
+
+.grid {
+  display: flex;
+  justify-content: space-between;
+  .col {
+    flex: 1 1 50%;
+  }
+}
+.col-text img {
+  $size: 1.1em;
+  display: inline;
+  width: $size;
+  height: $size;
+}
+.link-section {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  padding: 0 0 0.2em;
+  margin: 1.5em 0;
+  font-size: 1.4rem;
+  color: $secondary-color;
+  @extend %underline-animation;
+  svg {
+    $size: 1.3em;
+    width: $size;
+    height: $size;
+    margin: 0 1em 0 0;
+    path {
+      fill: currentColor;
+    }
+  }
+  span {
+    font-weight: bold;
+  }
+}
+.link-underline {
+  @extend %underline-animation;
+}
+.link-btn {
+  $main-color: $secondary-color;
+  display: inline-block;
+  margin: 3em 0;
+  padding: 1em 2em;
+  font-weight: bold;
+  color: $main-color;
+  background: transparent;
+  border: 1px solid $main-color;
+  border-radius: 0.5em;
+  transition: all $hover-transition;
+  &:hover,
+  &:focus {
+    color: $nav-bg;
+    background: $main-color;
+    box-shadow: 0 0 6em rgba($color: $main-color, $alpha: 0.5),
+      0 0 9em rgba($color: $main-color, $alpha: 0.25);
+  }
+}
+.drawing {
+  display: inline-block;
+  max-height: 1.2em;
+}
+.iScrollVerticalScrollbar {
+  width: 0.6rem !important;
+  .iScrollIndicator {
+    background: rgba($color: $text-color, $alpha: 0.5) !important;
+    border-radius: 0.3rem !important;
+  }
+}
+
+// Top to bottom
+aside {
+  $nav-size: $desktop-menu-width;
+  nav {
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 9999;
+    background: $nav-bg;
+    height: $mobile-menu-height;
+    @media screen and (min-width: $breakpoint-desktop) {
+      width: $desktop-menu-width;
+      height: 100vh;
+      right: inherit;
+      padding: Min(8rem, 8vh) 0;
+    }
+    ul {
+      @extend %flex-align;
+      justify-content: space-around;
+      flex-direction: row;
+      list-style-type: none;
+      height: 100%;
+      @media screen and (min-width: $breakpoint-desktop) {
+        flex-direction: column;
+        height: unset;
+      }
+      li {
+        width: 100%;
+        height: 100%;
+        user-select: none;
+        a {
+          @extend %flex-align;
+          justify-content: space-evenly;
+          flex-direction: column;
+          height: 100%;
+
+          padding: 0 1rem;
+
+          font-size: Min(1rem, 2.5vw);
+          color: $text-color;
+          text-transform: capitalize;
+          text-decoration: none;
+
+          transition: all $hover-transition;
+
+          @media screen and (min-width: $breakpoint-desktop) {
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 1.2em;
+            padding: 2em 3em;
+          }
+          &:hover,
+          &:focus-visible,
+          &.active {
+            outline: none;
+            color: $secondary-color;
+            border-color: $secondary-color;
+            .icon {
+              transform: scale(1.2);
+              filter: none;
+              path {
+                fill: $secondary-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.wrapper {
+  width: 100%;
+}
+main {
+  @extend %flex-align;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto $mobile-menu-height;
+  @media screen and (min-width: $breakpoint-desktop) {
+    margin: 0 0 0 $desktop-menu-width;
+  }
+}
+section {
+  @extend %sectionsHight;
+  width: 100%;
+  border-bottom: 3px solid $secondary-color;
+  padding: 2rem 0;
+  overflow: hidden;
+  @media screen and (min-width: $breakpoint-desktop) {
+    border: none;
+    padding: 0;
+  }
+}
+
+.col-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 100%;
+    height: 100%;
+    padding: 0 1em;
+    object-fit: contain;
+    filter: contrast(1.25);
+    transition: all $hover-transition;
+  }
+}
+
+.intro {
+  @extend %sectionsHight;
+  .col-image {
+    display: none;
+    @media screen and (min-width: $breakpoint-desktop) {
+      display: block;
+    }
+  }
+  .col-heading,
+  .col-text {
+    text-align: center;
+    @media screen and (min-width: $breakpoint-desktop) {
+      text-align: left;
+    }
+  }
+  .col-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    h2 {
+      font-size: Min(2rem, 6vw);
+      @media screen and (min-width: $breakpoint-column) {
+        font-size: Max(2rem, 2.5vw);
+      }
+      &:last-child {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
+
+.about {
+  @extend %sectionsHight;
+  .col-heading h1 {
+    @media screen and (max-width: $breakpoint-desktop) {
+      margin-top: 0;
+    }
+  }
+  .col-image {
+    background: $text-color;
+    img {
+      object-fit: cover;
+      @media screen and (min-width: $breakpoint-contain) {
+        object-fit: contain;
+      }
+    }
+  }
+  .col-text {
+    padding-top: 2em;
+    p {
+      line-height: 1.4;
+      span {
+        font-size: 1.1em;
+        font-family: "Courgette", cursive;
+      }
+    }
+  }
+}
+
+.development {
+  @extend %sectionsHight;
+}
+
+.training {
+  @extend %sectionsHight;
+  .col-text {
+    ul {
+      list-style: none;
+      counter-reset: mycounter;
+      li {
+        counter-increment: mycounter;
+        margin-bottom: 1em;
+        &::before {
+          $size: 1.8em;
+          content: counter(mycounter);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 0.5em 0 0;
+
+          color: $nav-bg;
+          font-weight: bold;
+          width: $size;
+          height: $size;
+          border-radius: 50%;
+          background: $secondary-color;
+        }
+      }
+    }
+  }
+}
+
+.gaming {
+  @extend %sectionsHight;
+}
+
+.contact {
+  @extend %sectionsHight;
+  padding: 0 Max(1.5em, 4vw);
+  h1 {
+    text-align: center;
+    margin-bottom: 0;
+    &:last-of-type {
+      margin: 0 0 1.5em;
+      color: $secondary-color;
+    }
+  }
+  .contact-form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4em;
+    label {
+      position: absolute;
+      top: 50%;
+      left: 1em;
+      transform: translateY(-50%);
+      z-index: 9999;
+      color: $text-color;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      transition: all $hover-transition;
+    }
+    input:not([type="submit"]),
+    textarea {
+      display: block;
+      width: 100%;
+      font-size: 1.1rem;
+      padding: 1em;
+      border-bottom: 2px solid $secondary-color;
+      color: $text-color;
+      background: transparent;
+      outline: none;
+      transition: border-color $hover-transition;
+      &:focus ~ label,
+      &:valid ~ label {
+        transform: translateY(-3.5em);
+      }
+      &:focus {
+        border-color: $highlight-color;
+      }
+    }
+    textarea {
+      resize: none;
+      margin: 2em 0 0 0;
+      min-height: 8em;
+      & ~ label {
+        top: 4em;
+      }
+    }
+    .input-box {
+      position: relative;
+      flex-basis: 100%;
+
+      @media screen and (min-width: 35rem) {
+        flex-basis: calc(50% - 2em);
+      }
+      &.full {
+        flex-basis: 100%;
+      }
+    }
+    .link-btn {
+      font-size: 1rem;
+      margin-top: 0;
+    }
+  }
+}
+// Animations
+// Waving hand
+.wavy-hand {
+  user-select: none;
+  font-size: 1.4em;
+  animation: waving 2.5s ease-in-out infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+@keyframes waving {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.scrolldown {
+  position: relative;
+  width: $scroll-width;
+  height: $scroll-height;
+  margin: 0 auto $scroll-height * 1.5;
+  border: $scroll-width / 10 solid $scroll-color;
+  border-radius: 50px;
+  box-sizing: border-box;
+  @extend %flex-align;
+  justify-content: center;
+}
+
+.scrolldown::before {
+  content: "";
+  position: absolute;
+  bottom: $scroll-height * 0.6;
+  left: 50%;
+  width: $scroll-width / 5;
+  height: $scroll-width / 5;
+  transform: translateX(-50%);
+  background-color: $scroll-color;
+  border-radius: 100%;
+  box-shadow: 0 -5px $scroll-width / 6 1px #ffffff66;
+  animation: scrolldown $scroll-speed infinite;
+}
+
+@keyframes scrolldown {
+  0% {
+    opacity: 0;
+    height: $scroll-width / 2.5;
+  }
+  40% {
+    opacity: 1;
+    height: $scroll-height / 5;
+  }
+  80% {
+    opacity: 0;
+    transform: translate(-50%, $scroll-width / 1.5);
+    height: $scroll-height / 5;
+  }
+  100% {
+    opacity: 0;
+    height: $scroll-width / 2.5;
+  }
+}
+.chevrons {
+  @extend %flex-align;
+  flex-direction: column;
+  width: $scroll-width;
+  margin-top: $scroll-height * 1.7;
+}
+.chevrondown {
+  position: relative;
+  border: solid $scroll-color;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  width: $scroll-width / 3;
+  height: $scroll-width / 3;
+  transform: rotate(45deg);
+}
+.chevrondown:nth-child(odd) {
+  animation: pulse $scroll-speed / 4 ease infinite alternate;
+}
+.chevrondown:nth-child(even) {
+  animation: pulse $scroll-speed / 4 ease infinite alternate $scroll-speed / 8;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+// testing new grid
+
+main {
+  section {
+    .grid {
+      @extend %sectionsHight;
+      display: grid;
+      grid-template-columns: 1fr;
+      & > div {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .col-heading,
+    .col-text {
+      padding: 0 Max(2rem, 2vw);
+    }
+    @media screen and (min-width: $breakpoint-desktop) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: max-content 1fr;
+      }
+      &:nth-child(odd) .grid {
+        grid-template-areas:
+          "image heading"
+          "image text";
+      }
+      &:nth-child(even) .grid {
+        grid-template-areas:
+          "heading image"
+          "text image";
+      }
+      .col-heading {
+        grid-area: heading;
+      }
+      .col-image {
+        grid-area: image;
+      }
+      .col-text {
+        grid-area: text;
+      }
+    }
+  }
+}
