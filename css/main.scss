@@ -3,7 +3,11 @@ $nav-bg: hsl(206, 72%, 11%);
 $text-color: hsl(34, 64%, 98%);
 $secondary-color: hsl(185, 100%, 50%);
 $highlight-color: hsl(347, 97%, 69%);
-$body-background: linear-gradient(to right, hsl(226, 65%, 9%), #0a0826);
+$body-background: linear-gradient(
+  to right,
+  hsl(226, 65%, 9%),
+  hsl(244, 65%, 9%)
+);
 
 // Animation speed
 $speed: 0.3s;
@@ -17,6 +21,12 @@ $mobile-menu-height: 12vh;
 $breakpoint-column: 48rem;
 $breakpoint-desktop: 68rem;
 $breakpoint-contain: 100rem;
+
+// scrolldown
+$scroll-color: $secondary-color;
+$scroll-height: 3.125rem;
+$scroll-width: $scroll-height * 0.6;
+$scroll-speed: 2s;
 
 // Templates
 
@@ -98,7 +108,7 @@ h1 {
     flex: 1 1 50%;
   }
 }
-.text img {
+.col-text img {
   $size: 1.1em;
   display: inline;
   width: $size;
@@ -216,7 +226,6 @@ aside {
           &:focus-visible,
           &.active {
             outline: none;
-            // background: $nav-bg-lighter;
             color: $secondary-color;
             border-color: $secondary-color;
             .icon {
@@ -248,44 +257,44 @@ section {
   @extend %sectionsHight;
   width: 100%;
   border-bottom: 3px solid $secondary-color;
+  padding: 2rem 0;
   overflow: hidden;
   @media screen and (min-width: $breakpoint-desktop) {
     border: none;
-  }
-  .test {
-    @extend %flex-align;
-    justify-content: center;
-    font-size: 5rem;
-    @extend %sectionsHight;
+    padding: 0;
   }
 }
-.col:not(.col-image) {
-  padding: 1em 5%;
-  @media screen and (min-width: $breakpoint-column) {
-    padding: 0 2em 0 4em;
-  }
-}
+
 .col-image {
-  // display: none;
-  @media screen and (min-width: $breakpoint-column) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: contrast(1.15);
-    img {
-      width: 100%;
-      height: 100%;
-      padding: 0 1em;
-      filter: contrast(1.1);
-      object-fit: contain;
-      transition: all $hover-transition;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 100%;
+    height: 100%;
+    padding: 0 1em;
+    object-fit: contain;
+    filter: contrast(1.25);
+    transition: all $hover-transition;
   }
 }
 
 .intro {
   @extend %sectionsHight;
-  .col-intro {
+  .col-image {
+    display: none;
+    @media screen and (min-width: $breakpoint-desktop) {
+      display: block;
+    }
+  }
+  .col-heading,
+  .col-text {
+    text-align: center;
+    @media screen and (min-width: $breakpoint-desktop) {
+      text-align: left;
+    }
+  }
+  .col-text {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -294,11 +303,8 @@ section {
       @media screen and (min-width: $breakpoint-column) {
         font-size: Max(2rem, 2.5vw);
       }
-      .courgette {
-        color: $highlight-color;
-      }
       &:last-child {
-        margin-top: 1rem;
+        margin-bottom: 2rem;
       }
     }
   }
@@ -306,6 +312,11 @@ section {
 
 .about {
   @extend %sectionsHight;
+  .col-heading h1 {
+    @media screen and (max-width: $breakpoint-desktop) {
+      margin-top: 0;
+    }
+  }
   .col-image {
     background: $text-color;
     img {
@@ -315,7 +326,8 @@ section {
       }
     }
   }
-  .col-about {
+  .col-text {
+    padding-top: 2em;
     p {
       line-height: 1.4;
       span {
@@ -332,7 +344,7 @@ section {
 
 .training {
   @extend %sectionsHight;
-  .col-training {
+  .col-text {
     ul {
       list-style: none;
       counter-reset: mycounter;
@@ -471,12 +483,6 @@ section {
   }
 }
 
-// scrolldown
-$scroll-color: $secondary-color;
-$scroll-height: 3.125rem;
-$scroll-width: $scroll-height * 0.6;
-$scroll-speed: 2s;
-
 .scrolldown {
   position: relative;
   width: $scroll-width;
@@ -554,3 +560,46 @@ $scroll-speed: 2s;
 }
 
 // testing new grid
+
+main {
+  section {
+    .grid {
+      @extend %sectionsHight;
+      display: grid;
+      grid-template-columns: 1fr;
+      & > div {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .col-heading,
+    .col-text {
+      padding: 0 Max(2rem, 2vw);
+    }
+    @media screen and (min-width: $breakpoint-desktop) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: max-content 1fr;
+      }
+      &:nth-child(odd) .grid {
+        grid-template-areas:
+          "image heading"
+          "image text";
+      }
+      &:nth-child(even) .grid {
+        grid-template-areas:
+          "heading image"
+          "text image";
+      }
+      .col-heading {
+        grid-area: heading;
+      }
+      .col-image {
+        grid-area: image;
+      }
+      .col-text {
+        grid-area: text;
+      }
+    }
+  }
+}

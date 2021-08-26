@@ -1,14 +1,14 @@
-section, section .test, .intro, .about, .development, .training, .gaming, .contact {
+section, .intro, .about, .development, .training, .gaming, .contact, main section .grid {
   min-height: 88vh;
 }
 
 @media screen and (min-width: 68rem) {
-  section, section .test, .intro, .about, .development, .training, .gaming, .contact {
+  section, .intro, .about, .development, .training, .gaming, .contact, main section .grid {
     height: 100vh;
   }
 }
 
-body, aside nav ul, aside nav ul li a, main, section .test, .scrolldown, .chevrons {
+body, aside nav ul, aside nav ul li a, main, .scrolldown, .chevrons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -102,7 +102,7 @@ h1 {
           flex: 1 1 50%;
 }
 
-.text img {
+.col-text img {
   display: inline;
   width: 1.1em;
   height: 1.1em;
@@ -294,60 +294,64 @@ main {
 section {
   width: 100%;
   border-bottom: 3px solid #00eaff;
+  padding: 2rem 0;
   overflow: hidden;
 }
 
 @media screen and (min-width: 68rem) {
   section {
     border: none;
+    padding: 0;
   }
 }
 
-section .test {
+.col-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  font-size: 5rem;
 }
 
-.col:not(.col-image) {
-  padding: 1em 5%;
+.col-image img {
+  width: 100%;
+  height: 100%;
+  padding: 0 1em;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -webkit-filter: contrast(1.25);
+          filter: contrast(1.25);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-@media screen and (min-width: 48rem) {
-  .col:not(.col-image) {
-    padding: 0 2em 0 4em;
+.intro .col-image {
+  display: none;
+}
+
+@media screen and (min-width: 68rem) {
+  .intro .col-image {
+    display: block;
   }
 }
 
-@media screen and (min-width: 48rem) {
-  .col-image {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-filter: contrast(1.15);
-            filter: contrast(1.15);
-  }
-  .col-image img {
-    width: 100%;
-    height: 100%;
-    padding: 0 1em;
-    -webkit-filter: contrast(1.1);
-            filter: contrast(1.1);
-    -o-object-fit: contain;
-       object-fit: contain;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+.intro .col-heading,
+.intro .col-text {
+  text-align: center;
+}
+
+@media screen and (min-width: 68rem) {
+  .intro .col-heading,
+  .intro .col-text {
+    text-align: left;
   }
 }
 
-.intro .col-intro {
+.intro .col-text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -360,22 +364,24 @@ section .test {
           justify-content: space-between;
 }
 
-.intro .col-intro h2 {
+.intro .col-text h2 {
   font-size: Min(2rem, 6vw);
 }
 
 @media screen and (min-width: 48rem) {
-  .intro .col-intro h2 {
+  .intro .col-text h2 {
     font-size: Max(2rem, 2.5vw);
   }
 }
 
-.intro .col-intro h2 .courgette {
-  color: #fd6384;
+.intro .col-text h2:last-child {
+  margin-bottom: 2rem;
 }
 
-.intro .col-intro h2:last-child {
-  margin-top: 1rem;
+@media screen and (max-width: 68rem) {
+  .about .col-heading h1 {
+    margin-top: 0;
+  }
 }
 
 .about .col-image {
@@ -394,26 +400,30 @@ section .test {
   }
 }
 
-.about .col-about p {
+.about .col-text {
+  padding-top: 2em;
+}
+
+.about .col-text p {
   line-height: 1.4;
 }
 
-.about .col-about p span {
+.about .col-text p span {
   font-size: 1.1em;
   font-family: "Courgette", cursive;
 }
 
-.training .col-training ul {
+.training .col-text ul {
   list-style: none;
   counter-reset: mycounter;
 }
 
-.training .col-training ul li {
+.training .col-text ul li {
   counter-increment: mycounter;
   margin-bottom: 1em;
 }
 
-.training .col-training ul li::before {
+.training .col-text ul li::before {
   content: counter(mycounter);
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -735,6 +745,55 @@ section .test {
   }
   to {
     opacity: 0.5;
+  }
+}
+
+main section .grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+main section .grid > div {
+  width: 100%;
+  height: 100%;
+}
+
+main section .col-heading,
+main section .col-text {
+  padding: 0 Max(2rem, 2vw);
+}
+
+@media screen and (min-width: 68rem) {
+  main section .grid {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: max-content 1fr;
+        grid-template-rows: -webkit-max-content 1fr;
+        grid-template-rows: max-content 1fr;
+  }
+  main section:nth-child(odd) .grid {
+        grid-template-areas: "image heading" "image text";
+  }
+  main section:nth-child(even) .grid {
+        grid-template-areas: "heading image" "text image";
+  }
+  main section .col-heading {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: heading;
+  }
+  main section .col-image {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 2;
+    grid-area: image;
+  }
+  main section .col-text {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: text;
   }
 }
 /*# sourceMappingURL=main.css.map */
