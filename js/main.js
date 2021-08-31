@@ -33,7 +33,7 @@ function initFullPage(e) {
   if (e.matches) {
     new fullpage("#fullpage", {
       autoScrolling: true,
-      responsiveWidth: 1160,
+      responsiveWidth: 1088,
       responsiveHeight: 700,
       scrollOverflow: true,
       onLeave: (origin, destination, direction) => {

@@ -8,6 +8,8 @@ $body-background: linear-gradient(
   hsl(226, 65%, 9%),
   hsl(244, 65%, 9%)
 );
+// Font size 
+$fz: 16px;
 
 // Animation speed
 $speed: 0.3s;
@@ -31,11 +33,9 @@ $scroll-speed: 2s;
 // Templates
 
 %sectionsHight {
-  $height: calc(100vh - $mobile-menu-height);
-  min-height: $height;
+  min-height: calc(100vh - 7rem);
   @media screen and (min-width: $breakpoint-desktop) {
-    $height: 100vh;
-    height: $height;
+    height: 100vh;
   }
 }
 
@@ -58,6 +58,7 @@ $scroll-speed: 2s;
 }
 // General
 :root {
+  font-size: $fz;
   font-family: "Noto Sans", sans-serif;
 }
 body {
@@ -69,7 +70,7 @@ body {
 
 h1 {
   font-size: Min(3rem, 10vw);
-  margin: 1.5em 0 1em;
+  margin: 0.5em 0 1em;
   @media screen and (min-width: $breakpoint-column) {
     font-size: Max(3rem, 4vw);
     margin: 0.7em 0 2em;
@@ -162,6 +163,24 @@ h1 {
     border-radius: 0.3rem !important;
   }
 }
+body {
+  &::-webkit-scrollbar-track {
+	background: $text-color;
+  border-radius: 0.35rem;
+
+}
+
+&::-webkit-scrollbar {
+  width: 0.7rem;
+  background: $body-background;
+}
+
+&::-webkit-scrollbar-thumb {
+  border: 0.5rem solid $highlight-color;
+  border-radius: 0.25rem;
+  background-clip: padding-box;
+}
+}
 
 // Top to bottom
 aside {
@@ -170,7 +189,7 @@ aside {
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: 9999;
+    z-index: 99;
     background: $nav-bg;
     height: $mobile-menu-height;
     @media screen and (min-width: $breakpoint-desktop) {
@@ -240,6 +259,12 @@ main {
     margin: 0 0 0 $desktop-menu-width;
   }
   section {
+    &:last-child {
+      margin-bottom: $mobile-menu-height;
+      @media screen and (min-width: $breakpoint-desktop) {
+        margin: 0;
+      }
+    }
     .grid {
       @extend %sectionsHight;
       display: grid;
@@ -428,7 +453,6 @@ section {
       top: 50%;
       left: 1em;
       transform: translateY(-50%);
-      z-index: 9999;
       color: $text-color;
       font-size: 1.1rem;
       letter-spacing: 0.1em;
