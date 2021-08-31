@@ -1,14 +1,14 @@
-section, .intro, .about, .development, .training, .gaming, .contact, main section .grid {
+main section .grid, section, .intro, .about, .development, .training, .gaming, .contact {
   min-height: 88vh;
 }
 
 @media screen and (min-width: 68rem) {
-  section, .intro, .about, .development, .training, .gaming, .contact, main section .grid {
+  main section .grid, section, .intro, .about, .development, .training, .gaming, .contact {
     height: 100vh;
   }
 }
 
-body, aside nav ul, aside nav ul li a, main, .scrolldown, .chevrons {
+body, aside nav ul, aside nav ul li a, .scrolldown, .chevrons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -85,21 +85,6 @@ h1 {
   fill: #fdfaf7;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-}
-
-.grid {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.grid .col {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 50%;
-          flex: 1 1 50%;
 }
 
 .col-text img {
@@ -231,7 +216,8 @@ aside nav ul li a {
           flex-direction: column;
   height: 100%;
   padding: 0 1rem;
-  font-size: Min(1rem, 2.5vw);
+  font-size: Max(1rem, 0.5vw);
+  font-size: 1rem;
   color: #fdfaf7;
   text-transform: capitalize;
   text-decoration: none;
@@ -275,19 +261,61 @@ aside nav ul li a:hover .icon path, aside nav ul li a:focus-visible .icon path, 
 }
 
 main {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   margin: 0 auto 12vh;
 }
 
 @media screen and (min-width: 68rem) {
   main {
     margin: 0 0 0 15rem;
+  }
+}
+
+main section .grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+main section .grid > div {
+  width: 100%;
+  height: 100%;
+}
+
+main section .col-heading,
+main section .col-text {
+  padding: 0 Max(2rem, 2vw);
+}
+
+@media screen and (min-width: 68rem) {
+  main section .grid {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: max-content 1fr;
+        grid-template-rows: -webkit-max-content 1fr;
+        grid-template-rows: max-content 1fr;
+  }
+  main section:nth-child(odd) .grid {
+        grid-template-areas: "image heading" "image text";
+  }
+  main section:nth-child(even) .grid {
+        grid-template-areas: "heading image" "text image";
+  }
+  main section .col-heading {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: heading;
+  }
+  main section .col-image {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 2;
+    grid-area: image;
+  }
+  main section .col-text {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: text;
   }
 }
 
@@ -337,6 +365,11 @@ section {
   .intro .col-image {
     display: block;
   }
+}
+
+.intro .col-heading h1,
+.intro .col-text .text {
+  opacity: 0;
 }
 
 .intro .col-heading,
@@ -549,7 +582,6 @@ section {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  font-size: 1.4em;
   -webkit-animation: waving 2.5s ease-in-out infinite;
           animation: waving 2.5s ease-in-out infinite;
   -webkit-transform-origin: 70% 70%;
@@ -745,55 +777,6 @@ section {
   }
   to {
     opacity: 0.5;
-  }
-}
-
-main section .grid {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr;
-      grid-template-columns: 1fr;
-}
-
-main section .grid > div {
-  width: 100%;
-  height: 100%;
-}
-
-main section .col-heading,
-main section .col-text {
-  padding: 0 Max(2rem, 2vw);
-}
-
-@media screen and (min-width: 68rem) {
-  main section .grid {
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
-    -ms-grid-rows: max-content 1fr;
-        grid-template-rows: -webkit-max-content 1fr;
-        grid-template-rows: max-content 1fr;
-  }
-  main section:nth-child(odd) .grid {
-        grid-template-areas: "image heading" "image text";
-  }
-  main section:nth-child(even) .grid {
-        grid-template-areas: "heading image" "text image";
-  }
-  main section .col-heading {
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    grid-area: heading;
-  }
-  main section .col-image {
-    -ms-grid-row: 1;
-    -ms-grid-row-span: 2;
-    -ms-grid-column: 2;
-    grid-area: image;
-  }
-  main section .col-text {
-    -ms-grid-row: 2;
-    -ms-grid-column: 1;
-    grid-area: text;
   }
 }
 /*# sourceMappingURL=main.css.map */

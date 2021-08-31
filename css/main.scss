@@ -101,13 +101,6 @@ h1 {
   }
 }
 
-.grid {
-  display: flex;
-  justify-content: space-between;
-  .col {
-    flex: 1 1 50%;
-  }
-}
 .col-text img {
   $size: 1.1em;
   display: inline;
@@ -172,7 +165,6 @@ h1 {
 
 // Top to bottom
 aside {
-  $nav-size: $desktop-menu-width;
   nav {
     position: fixed;
     right: 0;
@@ -206,10 +198,9 @@ aside {
           justify-content: space-evenly;
           flex-direction: column;
           height: 100%;
-
           padding: 0 1rem;
-
-          font-size: Min(1rem, 2.5vw);
+          font-size: Max(1rem, 0.5vw);
+          font-size: 1rem;
           color: $text-color;
           text-transform: capitalize;
           text-decoration: none;
@@ -245,14 +236,52 @@ aside {
   width: 100%;
 }
 main {
-  @extend %flex-align;
-  justify-content: center;
-  flex-direction: column;
   margin: 0 auto $mobile-menu-height;
   @media screen and (min-width: $breakpoint-desktop) {
     margin: 0 0 0 $desktop-menu-width;
   }
+  section {
+    .grid {
+      @extend %sectionsHight;
+      display: grid;
+      grid-template-columns: 1fr;
+      & > div {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .col-heading,
+    .col-text {
+      padding: 0 Max(2rem, 2vw);
+    }
+    @media screen and (min-width: $breakpoint-desktop) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: max-content 1fr;
+      }
+      &:nth-child(odd) .grid {
+        grid-template-areas:
+          "image heading"
+          "image text";
+      }
+      &:nth-child(even) .grid {
+        grid-template-areas:
+          "heading image"
+          "text image";
+      }
+      .col-heading {
+        grid-area: heading;
+      }
+      .col-image {
+        grid-area: image;
+      }
+      .col-text {
+        grid-area: text;
+      }
+    }
+  }
 }
+
 section {
   @extend %sectionsHight;
   width: 100%;
@@ -286,6 +315,10 @@ section {
     @media screen and (min-width: $breakpoint-desktop) {
       display: block;
     }
+  }
+  .col-heading h1,
+  .col-text .text {
+    opacity: 0;
   }
   .col-heading,
   .col-text {
@@ -451,7 +484,6 @@ section {
 // Waving hand
 .wavy-hand {
   user-select: none;
-  font-size: 1.4em;
   animation: waving 2.5s ease-in-out infinite;
   transform-origin: 70% 70%;
   display: inline-block;
@@ -561,45 +593,3 @@ section {
 
 // testing new grid
 
-main {
-  section {
-    .grid {
-      @extend %sectionsHight;
-      display: grid;
-      grid-template-columns: 1fr;
-      & > div {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .col-heading,
-    .col-text {
-      padding: 0 Max(2rem, 2vw);
-    }
-    @media screen and (min-width: $breakpoint-desktop) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: max-content 1fr;
-      }
-      &:nth-child(odd) .grid {
-        grid-template-areas:
-          "image heading"
-          "image text";
-      }
-      &:nth-child(even) .grid {
-        grid-template-areas:
-          "heading image"
-          "text image";
-      }
-      .col-heading {
-        grid-area: heading;
-      }
-      .col-image {
-        grid-area: image;
-      }
-      .col-text {
-        grid-area: text;
-      }
-    }
-  }
-}
