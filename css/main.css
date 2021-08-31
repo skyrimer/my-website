@@ -1,5 +1,5 @@
 main section .grid, section, .intro, .about, .development, .training, .gaming, .contact {
-  min-height: 88vh;
+  min-height: calc(100vh - $mobile-menu-height);
 }
 
 @media screen and (min-width: 68rem) {
@@ -75,8 +75,8 @@ h1 {
 }
 
 .icon {
-  width: Min(2.5rem, 9vw);
-  height: Min(2.5rem, 9vw);
+  width: Min(2.5rem, 8vw);
+  height: Min(2.5rem, 8vw);
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
@@ -164,7 +164,7 @@ aside nav {
   bottom: 0;
   z-index: 9999;
   background: #081f30;
-  height: 12vh;
+  height: 7rem;
 }
 
 @media screen and (min-width: 68rem) {
@@ -216,8 +216,7 @@ aside nav ul li a {
           flex-direction: column;
   height: 100%;
   padding: 0 1rem;
-  font-size: Max(1rem, 0.5vw);
-  font-size: 1rem;
+  font-size: Min(1rem, 3vw);
   color: #fdfaf7;
   text-transform: capitalize;
   text-decoration: none;
@@ -261,7 +260,7 @@ aside nav ul li a:hover .icon path, aside nav ul li a:focus-visible .icon path, 
 }
 
 main {
-  margin: 0 auto 12vh;
+  margin: 0 auto 7rem;
 }
 
 @media screen and (min-width: 68rem) {

@@ -15,7 +15,7 @@ $hover-transition: $speed ease-in-out;
 
 // Menu
 $desktop-menu-width: 15rem;
-$mobile-menu-height: 12vh;
+$mobile-menu-height: 7rem;
 
 // Breakpoints
 $breakpoint-column: 48rem;
@@ -31,7 +31,7 @@ $scroll-speed: 2s;
 // Templates
 
 %sectionsHight {
-  $height: 100vh - $mobile-menu-height;
+  $height: calc(100vh - $mobile-menu-height);
   min-height: $height;
   @media screen and (min-width: $breakpoint-desktop) {
     $height: 100vh;
@@ -91,7 +91,7 @@ h1 {
 }
 
 .icon {
-  $size: Min(2.5rem, 9vw);
+  $size: Min(2.5rem, 8vw);
   width: $size;
   height: $size;
   transition: all $hover-transition;
@@ -199,8 +199,7 @@ aside {
           flex-direction: column;
           height: 100%;
           padding: 0 1rem;
-          font-size: Max(1rem, 0.5vw);
-          font-size: 1rem;
+          font-size: Min(1rem, 3vw);
           color: $text-color;
           text-transform: capitalize;
           text-decoration: none;
