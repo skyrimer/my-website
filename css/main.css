@@ -316,6 +316,8 @@ main section .col-text {
 
 @media screen and (min-width: 68rem) {
   main section .grid {
+    display: -ms-grid;
+    display: grid;
     -ms-grid-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
     -ms-grid-rows: max-content 1fr;

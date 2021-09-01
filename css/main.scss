@@ -1,7 +1,7 @@
 // Colors
 $nav-bg: hsl(206, 72%, 11%);
 $text-color: hsl(34, 64%, 98%);
-$secondary-color: hsl(185, 100%, 50%);
+$secondary-color: #00eaff;
 $highlight-color: hsl(347, 97%, 69%);
 $body-background: linear-gradient(
   to right,
@@ -280,6 +280,7 @@ main {
     }
     @media screen and (min-width: $breakpoint-desktop) {
       .grid {
+        display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: max-content 1fr;
       }
