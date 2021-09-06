@@ -1,14 +1,14 @@
-main section .grid, section, .intro, .about, .development, .training, .gaming, .contact {
+main section, main section .grid, .intro, .about, .development, .training, .gaming, .contact {
   min-height: calc(100vh - 7rem);
 }
 
 @media screen and (min-width: 68rem) {
-  main section .grid, section, .intro, .about, .development, .training, .gaming, .contact {
+  main section, main section .grid, .intro, .about, .development, .training, .gaming, .contact {
     height: 100vh;
   }
 }
 
-body, aside nav ul, aside nav ul li a, .scrolldown, .chevrons {
+aside nav ul, aside nav ul li a, .scrolldown, .chevrons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -39,10 +39,6 @@ body, aside nav ul, aside nav ul li a, .scrolldown, .chevrons {
 }
 
 body {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   background: -webkit-gradient(linear, left top, right top, from(#080f26), to(#0a0826));
   background: linear-gradient(to right, #080f26, #0a0826);
   color: #fdfaf7;
@@ -233,7 +229,6 @@ aside nav ul li a {
       -ms-flex-direction: column;
           flex-direction: column;
   height: 100%;
-  padding: 0 1rem;
   font-size: Min(1rem, 3vw);
   color: #fdfaf7;
   text-transform: capitalize;
@@ -287,6 +282,24 @@ main {
   }
 }
 
+main section {
+  width: 100%;
+  border-bottom: 3px solid #00eaff;
+  padding: 2rem 0;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 68rem) {
+  main section {
+    border: none;
+    padding: 0;
+  }
+}
+
+main section:first-child {
+  padding: 0;
+}
+
 main section:last-child {
   margin-bottom: 7rem;
 }
@@ -315,6 +328,10 @@ main section .col-text {
 }
 
 @media screen and (min-width: 68rem) {
+  main section {
+    border: none;
+    padding: 0;
+  }
   main section .grid {
     display: -ms-grid;
     display: grid;
@@ -345,20 +362,6 @@ main section .col-text {
     -ms-grid-row: 2;
     -ms-grid-column: 1;
     grid-area: text;
-  }
-}
-
-section {
-  width: 100%;
-  border-bottom: 3px solid #00eaff;
-  padding: 2rem 0;
-  overflow: hidden;
-}
-
-@media screen and (min-width: 68rem) {
-  section {
-    border: none;
-    padding: 0;
   }
 }
 

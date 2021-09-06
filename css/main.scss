@@ -8,7 +8,7 @@ $body-background: linear-gradient(
   hsl(226, 65%, 9%),
   hsl(244, 65%, 9%)
 );
-// Font size 
+// Font size
 $fz: 16px;
 
 // Animation speed
@@ -62,8 +62,6 @@ $scroll-speed: 2s;
   font-family: "Noto Sans", sans-serif;
 }
 body {
-  @extend %flex-align;
-  flex-direction: column;
   background: $body-background;
   color: $text-color;
 }
@@ -165,21 +163,20 @@ h1 {
 }
 body {
   &::-webkit-scrollbar-track {
-	background: $text-color;
-  border-radius: 0.35rem;
+    background: $text-color;
+    border-radius: 0.35rem;
+  }
 
-}
+  &::-webkit-scrollbar {
+    width: 0.7rem;
+    background: $body-background;
+  }
 
-&::-webkit-scrollbar {
-  width: 0.7rem;
-  background: $body-background;
-}
-
-&::-webkit-scrollbar-thumb {
-  border: 0.5rem solid $highlight-color;
-  border-radius: 0.25rem;
-  background-clip: padding-box;
-}
+  &::-webkit-scrollbar-thumb {
+    border: 0.5rem solid $highlight-color;
+    border-radius: 0.25rem;
+    background-clip: padding-box;
+  }
 }
 
 // Top to bottom
@@ -217,7 +214,6 @@ aside {
           justify-content: space-evenly;
           flex-direction: column;
           height: 100%;
-          padding: 0 1rem;
           font-size: Min(1rem, 3vw);
           color: $text-color;
           text-transform: capitalize;
@@ -259,6 +255,18 @@ main {
     margin: 0 0 0 $desktop-menu-width;
   }
   section {
+    @extend %sectionsHight;
+    width: 100%;
+    border-bottom: 3px solid $secondary-color;
+    padding: 2rem 0;
+    overflow: hidden;
+    @media screen and (min-width: $breakpoint-desktop) {
+      border: none;
+      padding: 0;
+    }
+    &:first-child {
+      padding: 0;
+    }
     &:last-child {
       margin-bottom: $mobile-menu-height;
       @media screen and (min-width: $breakpoint-desktop) {
@@ -279,6 +287,8 @@ main {
       padding: 0 Max(2rem, 2vw);
     }
     @media screen and (min-width: $breakpoint-desktop) {
+      border: none;
+      padding: 0;
       .grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -304,18 +314,6 @@ main {
         grid-area: text;
       }
     }
-  }
-}
-
-section {
-  @extend %sectionsHight;
-  width: 100%;
-  border-bottom: 3px solid $secondary-color;
-  padding: 2rem 0;
-  overflow: hidden;
-  @media screen and (min-width: $breakpoint-desktop) {
-    border: none;
-    padding: 0;
   }
 }
 
@@ -616,4 +614,3 @@ section {
 }
 
 // testing new grid
-

@@ -1,5 +1,14 @@
 window.onload = () => {
-  function animate(item, from, to, duration = 1, delay = 0.35) {
+  const AnimationSpeed = 0.8;
+  const AnimationDuration = 1;
+
+  function animate(
+    item,
+    from,
+    to,
+    duration = AnimationDuration,
+    delay = AnimationSpeed / 2
+  ) {
     to["duration"] = duration;
     to["delay"] = delay;
     gsap.fromTo(item, from, to);
@@ -23,8 +32,8 @@ window.onload = () => {
           element,
           { strokeDashoffset: drawingLength[index] },
           { strokeDashoffset: 0 },
-          1,
-          1.35
+          AnimationDuration,
+          AnimationSpeed * 2
         );
       }
     );
@@ -36,6 +45,7 @@ window.onload = () => {
         autoScrolling: true,
         responsiveWidth: 1088,
         responsiveHeight: 700,
+        scrollingSpeed: AnimationSpeed * 1000,
         scrollOverflow: true,
         onLeave: (origin, destination, direction) => {
           let section = destination.item;
@@ -56,28 +66,27 @@ window.onload = () => {
               section.querySelector("h1:last-of-type"),
               { opacity: 0 },
               { opacity: 1 },
-              0.7,
-              1.35
+              AnimationDuration,
+              AnimationSpeed * 2
             );
           }
         },
       });
     } else {
-      try {
-        new fullpage_api.destroy("all");
-      } catch (ReferenceError) {}
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      images.forEach((img) => {
+        img.src = img.dataset.src;
+      });
     }
   }
 
   // Writing text animation
   let drawingLength = [];
-  Array.from(document.querySelectorAll(".drawing path")).forEach(
-    (element, index) => {
-      let length = element.getTotalLength();
-      element.style.strokeDasharray = length;
-      drawingLength.push(length);
-    }
-  );
+  document.querySelectorAll(".drawing path").forEach((element) => {
+    let length = element.getTotalLength();
+    element.style.strokeDasharray = length;
+    drawingLength.push(length);
+  });
 
   // Adaptive slider
   const FullPageCondition = window.matchMedia("(min-width: 68rem)");
