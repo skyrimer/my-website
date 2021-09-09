@@ -1,19 +1,27 @@
 // Colors
 $nav-bg: hsl(206, 72%, 11%);
 $text-color: hsl(34, 64%, 98%);
-$secondary-color: #00eaff;
+$secondary-color: hsl(185, 100%, 50%);
 $highlight-color: hsl(347, 97%, 69%);
 $body-background: linear-gradient(
   to right,
   hsl(226, 65%, 9%),
   hsl(244, 65%, 9%)
 );
-// Font size
+
+// Font
+$ff-main: "Noto Sans", sans-serif;
+$ff-secondary: "Courgette", cursive;
 $fz: 16px;
+$fz-s: clamp(0.7rem, 3vw, 1rem);
+$fz-btn: clamp(0.9rem, 1.1vw, 1.1rem);
+$fz-m: clamp(1rem, 1.15vw, 1.3rem);
+$fz-l: clamp(1.3rem, 1.5vw, 1.6rem);
+$fz-xl: clamp(1.4rem, 2vw, 4rem);
+$fz-xxl: clamp(2.5rem, 4vw, 6rem);
 
 // Animation speed
-$speed: 0.3s;
-$hover-transition: $speed ease-in-out;
+$hover-transition: 0.3s ease-in-out;
 
 // Menu
 $desktop-menu-width: 15rem;
@@ -24,10 +32,18 @@ $breakpoint-column: 48rem;
 $breakpoint-desktop: 68rem;
 $breakpoint-contain: 100rem;
 
+// scrollbar
+$scrollbar-width: 0.6rem;
+$scollbar-color: rgba(
+  $color: $text-color,
+  $alpha: 0.5,
+);
+$scrollbar-background: $nav-bg;
+
 // scrolldown
-$scroll-color: $secondary-color;
 $scroll-height: 3.125rem;
 $scroll-width: $scroll-height * 0.6;
+$scroll-color: $secondary-color;
 $scroll-speed: 2s;
 
 // Templates
@@ -45,39 +61,41 @@ $scroll-speed: 2s;
 }
 
 %underline-animation {
+  $underline-width: 3px;
   color: $secondary-color;
   background-image: linear-gradient(to right, currentColor, currentColor);
-  background-size: 0 3px;
+  background-size: 0 $underline-width;
   background-position: left bottom;
   background-repeat: no-repeat;
   transition: all $hover-transition;
-  &:hover {
+  &:hover,
+  &:focus {
     color: $highlight-color;
-    background-size: 100% 3px;
+    background-size: 100% $underline-width;
   }
 }
 // General
 :root {
   font-size: $fz;
-  font-family: "Noto Sans", sans-serif;
+  font-family: $ff-main;
 }
+
 body {
   background: $body-background;
   color: $text-color;
 }
 
 h1 {
-  font-size: Min(3rem, 10vw);
+  font-size: $fz-xxl;
   margin: 0.5em 0 1em;
   @media screen and (min-width: $breakpoint-column) {
-    font-size: Max(3rem, 4vw);
-    margin: 0.7em 0 2em;
+    margin: 0.8em 0 1em;
   }
 }
 
 p,
 li {
-  font-size: Max(1.2rem, 1vw);
+  font-size: $fz-m;
 }
 p {
   line-height: 2;
@@ -86,9 +104,12 @@ p {
 
 .courgette,
 h1 {
-  font-family: "Courgette", cursive;
+  font-family: $ff-secondary;
 }
-
+a:focus:not(.link-btn) {
+  outline: 0.1rem solid currentColor;
+  outline-offset: 0.5rem;
+}
 .icon {
   $size: Min(2.5rem, 8vw);
   width: $size;
@@ -107,14 +128,17 @@ h1 {
   height: $size;
 }
 .link-section {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  width: max-content;
-  padding: 0 0 0.2em;
-  margin: 1.5em 0;
-  font-size: 1.4rem;
+  max-width: 100%;
+  padding: 0 0.2em 0.2em 0;
+  margin: 1rem 0;
+  font-size: $fz-l;
   color: $secondary-color;
   @extend %underline-animation;
+  span {
+    font-weight: bold;
+  }
   svg {
     $size: 1.3em;
     width: $size;
@@ -123,9 +147,6 @@ h1 {
     path {
       fill: currentColor;
     }
-  }
-  span {
-    font-weight: bold;
   }
 }
 .link-underline {
@@ -136,46 +157,46 @@ h1 {
   display: inline-block;
   margin: 3em 0;
   padding: 1em 2em;
+  font-size: $fz-btn;
   font-weight: bold;
   color: $main-color;
   background: transparent;
-  border: 1px solid $main-color;
+  border: 1px solid currentColor;
   border-radius: 0.5em;
   transition: all $hover-transition;
   &:hover,
   &:focus {
+    outline: none;
     color: $nav-bg;
     background: $main-color;
-    box-shadow: 0 0 6em rgba($color: $main-color, $alpha: 0.5),
-      0 0 9em rgba($color: $main-color, $alpha: 0.25);
+    box-shadow: 0 0 6em rgba($color: $main-color, $alpha: 0.2),
+      0 0 9em rgba($color: $main-color, $alpha: 0.1);
   }
 }
 .drawing {
   display: inline-block;
   max-height: 1.2em;
 }
+
 .iScrollVerticalScrollbar {
-  width: 0.6rem !important;
+  width: $scrollbar-width !important;
   .iScrollIndicator {
-    background: rgba($color: $text-color, $alpha: 0.5) !important;
-    border-radius: 0.3rem !important;
+    background: $scollbar-color !important;
+    border-radius: $scrollbar-width / 2 !important;
   }
 }
 body {
   &::-webkit-scrollbar-track {
-    background: $text-color;
-    border-radius: 0.35rem;
+    background: $scrollbar-background;
   }
 
   &::-webkit-scrollbar {
-    width: 0.7rem;
-    background: $body-background;
+    width: $scrollbar-width;
   }
 
   &::-webkit-scrollbar-thumb {
-    border: 0.5rem solid $highlight-color;
-    border-radius: 0.25rem;
-    background-clip: padding-box;
+    border-radius: $scroll-width / 2;
+    border: $scrollbar-width solid $scollbar-color;
   }
 }
 
@@ -214,11 +235,10 @@ aside {
           justify-content: space-evenly;
           flex-direction: column;
           height: 100%;
-          font-size: Min(1rem, 3vw);
+          font-size: $fz-s;
           color: $text-color;
           text-transform: capitalize;
           text-decoration: none;
-
           transition: all $hover-transition;
 
           @media screen and (min-width: $breakpoint-desktop) {
@@ -230,7 +250,6 @@ aside {
           &:hover,
           &:focus-visible,
           &.active {
-            outline: none;
             color: $secondary-color;
             border-color: $secondary-color;
             .icon {
@@ -246,32 +265,28 @@ aside {
     }
   }
 }
-.wrapper {
-  width: 100%;
-}
 main {
   margin: 0 auto $mobile-menu-height;
   @media screen and (min-width: $breakpoint-desktop) {
     margin: 0 0 0 $desktop-menu-width;
   }
   section {
-    @extend %sectionsHight;
     width: 100%;
     border-bottom: 3px solid $secondary-color;
     padding: 2rem 0;
     overflow: hidden;
-    @media screen and (min-width: $breakpoint-desktop) {
-      border: none;
-      padding: 0;
-    }
     &:first-child {
       padding: 0;
     }
     &:last-child {
-      margin-bottom: $mobile-menu-height;
+      padding: 0 0 $mobile-menu-height;
       @media screen and (min-width: $breakpoint-desktop) {
-        margin: 0;
+        padding: 0;
       }
+    }
+    @media screen and (min-width: $breakpoint-desktop) {
+      border: none;
+      padding: 0;
     }
     .grid {
       @extend %sectionsHight;
@@ -322,8 +337,6 @@ main {
   align-items: center;
   justify-content: center;
   img {
-    width: 100%;
-    height: 100%;
     padding: 0 1em;
     object-fit: contain;
     filter: contrast(1.25);
@@ -355,10 +368,7 @@ main {
     flex-direction: column;
     justify-content: space-between;
     h2 {
-      font-size: Min(2rem, 6vw);
-      @media screen and (min-width: $breakpoint-column) {
-        font-size: Max(2rem, 2.5vw);
-      }
+      font-size: $fz-xl;
       &:last-child {
         margin-bottom: 2rem;
       }
@@ -376,6 +386,7 @@ main {
   .col-image {
     background: $text-color;
     img {
+      padding: 0 2px;
       object-fit: cover;
       @media screen and (min-width: $breakpoint-contain) {
         object-fit: contain;
@@ -388,7 +399,7 @@ main {
       line-height: 1.4;
       span {
         font-size: 1.1em;
-        font-family: "Courgette", cursive;
+        font-family: $ff-secondary;
       }
     }
   }
@@ -447,13 +458,15 @@ main {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 4em;
+    font-size: 1.1rem;
+
     label {
       position: absolute;
       top: 50%;
       left: 1em;
       transform: translateY(-50%);
       color: $text-color;
-      font-size: 1.1rem;
+      font-size: inherit;
       letter-spacing: 0.1em;
       pointer-events: none;
       transition: all $hover-transition;
@@ -462,7 +475,7 @@ main {
     textarea {
       display: block;
       width: 100%;
-      font-size: 1.1rem;
+      font-size: inherit;
       padding: 1em;
       border-bottom: 2px solid $secondary-color;
       color: $text-color;
@@ -497,7 +510,6 @@ main {
       }
     }
     .link-btn {
-      font-size: 1rem;
       margin-top: 0;
     }
   }

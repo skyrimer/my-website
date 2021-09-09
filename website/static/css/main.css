@@ -1,9 +1,9 @@
-main section, main section .grid, .intro, .about, .development, .training, .gaming, .contact {
+main section .grid, .intro, .about, .development, .training, .gaming, .contact {
   min-height: calc(100vh - 7rem);
 }
 
 @media screen and (min-width: 68rem) {
-  main section, main section .grid, .intro, .about, .development, .training, .gaming, .contact {
+  main section .grid, .intro, .about, .development, .training, .gaming, .contact {
     height: 100vh;
   }
 }
@@ -28,7 +28,7 @@ aside nav ul, aside nav ul li a, .scrolldown, .chevrons {
   transition: all 0.3s ease-in-out;
 }
 
-.link-section:hover, .link-underline:hover {
+.link-section:hover, .link-underline:hover, .link-section:focus, .link-underline:focus {
   color: #fd6384;
   background-size: 100% 3px;
 }
@@ -45,20 +45,19 @@ body {
 }
 
 h1 {
-  font-size: Min(3rem, 10vw);
+  font-size: clamp(2.5rem, 4vw, 6rem);
   margin: 0.5em 0 1em;
 }
 
 @media screen and (min-width: 48rem) {
   h1 {
-    font-size: Max(3rem, 4vw);
-    margin: 0.7em 0 2em;
+    margin: 0.8em 0 1em;
   }
 }
 
 p,
 li {
-  font-size: Max(1.2rem, 1vw);
+  font-size: clamp(1rem, 1.15vw, 1.3rem);
 }
 
 p {
@@ -69,6 +68,11 @@ p {
 .courgette,
 h1 {
   font-family: "Courgette", cursive;
+}
+
+a:focus:not(.link-btn) {
+  outline: 0.1rem solid currentColor;
+  outline-offset: 0.5rem;
 }
 
 .icon {
@@ -91,19 +95,21 @@ h1 {
 }
 
 .link-section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  padding: 0 0 0.2em;
-  margin: 1.5em 0;
-  font-size: 1.4rem;
+  max-width: 100%;
+  padding: 0 0.2em 0.2em 0;
+  margin: 1rem 0;
+  font-size: clamp(1.3rem, 1.5vw, 1.6rem);
   color: #00eaff;
+}
+
+.link-section span {
+  font-weight: bold;
 }
 
 .link-section svg {
@@ -116,28 +122,26 @@ h1 {
   fill: currentColor;
 }
 
-.link-section span {
-  font-weight: bold;
-}
-
 .link-btn {
   display: inline-block;
   margin: 3em 0;
   padding: 1em 2em;
+  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
   font-weight: bold;
   color: #00eaff;
   background: transparent;
-  border: 1px solid #00eaff;
+  border: 1px solid currentColor;
   border-radius: 0.5em;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
 .link-btn:hover, .link-btn:focus {
+  outline: none;
   color: #081f30;
   background: #00eaff;
-  -webkit-box-shadow: 0 0 6em rgba(0, 234, 255, 0.5), 0 0 9em rgba(0, 234, 255, 0.25);
-          box-shadow: 0 0 6em rgba(0, 234, 255, 0.5), 0 0 9em rgba(0, 234, 255, 0.25);
+  -webkit-box-shadow: 0 0 6em rgba(0, 234, 255, 0.2), 0 0 9em rgba(0, 234, 255, 0.1);
+          box-shadow: 0 0 6em rgba(0, 234, 255, 0.2), 0 0 9em rgba(0, 234, 255, 0.1);
 }
 
 .drawing {
@@ -155,20 +159,16 @@ h1 {
 }
 
 body::-webkit-scrollbar-track {
-  background: #fdfaf7;
-  border-radius: 0.35rem;
+  background: #081f30;
 }
 
 body::-webkit-scrollbar {
-  width: 0.7rem;
-  background: -webkit-gradient(linear, left top, right top, from(#080f26), to(#0a0826));
-  background: linear-gradient(to right, #080f26, #0a0826);
+  width: 0.6rem;
 }
 
 body::-webkit-scrollbar-thumb {
-  border: 0.5rem solid #fd6384;
-  border-radius: 0.25rem;
-  background-clip: padding-box;
+  border-radius: 0.9375rem;
+  border: 0.6rem solid rgba(253, 250, 247, 0.5);
 }
 
 aside nav {
@@ -229,7 +229,7 @@ aside nav ul li a {
       -ms-flex-direction: column;
           flex-direction: column;
   height: 100%;
-  font-size: Min(1rem, 3vw);
+  font-size: clamp(0.7rem, 3vw, 1rem);
   color: #fdfaf7;
   text-transform: capitalize;
   text-decoration: none;
@@ -252,7 +252,6 @@ aside nav ul li a {
 }
 
 aside nav ul li a:hover, aside nav ul li a:focus-visible, aside nav ul li a.active {
-  outline: none;
   color: #00eaff;
   border-color: #00eaff;
 }
@@ -266,10 +265,6 @@ aside nav ul li a:hover .icon, aside nav ul li a:focus-visible .icon, aside nav 
 
 aside nav ul li a:hover .icon path, aside nav ul li a:focus-visible .icon path, aside nav ul li a.active .icon path {
   fill: #00eaff;
-}
-
-.wrapper {
-  width: 100%;
 }
 
 main {
@@ -289,24 +284,24 @@ main section {
   overflow: hidden;
 }
 
-@media screen and (min-width: 68rem) {
-  main section {
-    border: none;
-    padding: 0;
-  }
-}
-
 main section:first-child {
   padding: 0;
 }
 
 main section:last-child {
-  margin-bottom: 7rem;
+  padding: 0 0 7rem;
 }
 
 @media screen and (min-width: 68rem) {
   main section:last-child {
-    margin: 0;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 68rem) {
+  main section {
+    border: none;
+    padding: 0;
   }
 }
 
@@ -378,8 +373,6 @@ main section .col-text {
 }
 
 .col-image img {
-  width: 100%;
-  height: 100%;
   padding: 0 1em;
   -o-object-fit: contain;
      object-fit: contain;
@@ -430,13 +423,7 @@ main section .col-text {
 }
 
 .intro .col-text h2 {
-  font-size: Min(2rem, 6vw);
-}
-
-@media screen and (min-width: 48rem) {
-  .intro .col-text h2 {
-    font-size: Max(2rem, 2.5vw);
-  }
+  font-size: clamp(1.4rem, 2vw, 4rem);
 }
 
 .intro .col-text h2:last-child {
@@ -454,6 +441,7 @@ main section .col-text {
 }
 
 .about .col-image img {
+  padding: 0 2px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -532,6 +520,7 @@ main section .col-text {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 4em;
+  font-size: 1.1rem;
 }
 
 .contact .contact-form label {
@@ -541,7 +530,7 @@ main section .col-text {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   color: #fdfaf7;
-  font-size: 1.1rem;
+  font-size: inherit;
   letter-spacing: 0.1em;
   pointer-events: none;
   -webkit-transition: all 0.3s ease-in-out;
@@ -552,7 +541,7 @@ main section .col-text {
 .contact .contact-form textarea {
   display: block;
   width: 100%;
-  font-size: 1.1rem;
+  font-size: inherit;
   padding: 1em;
   border-bottom: 2px solid #00eaff;
   color: #fdfaf7;
@@ -604,7 +593,6 @@ main section .col-text {
 }
 
 .contact .contact-form .link-btn {
-  font-size: 1rem;
   margin-top: 0;
 }
 
